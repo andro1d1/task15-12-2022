@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+refresh_token.txt
+main-bot-371616-cc7184a85c55.json
+access_token.txt
