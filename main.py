@@ -1,4 +1,4 @@
-from googlewriter import GoogleWriter
+from googlewriter import GoogleWriter, GoogleWriterV2
 from amoCRM import AmoCrm
 
 def get_values(dict: dict)->list:
@@ -9,16 +9,16 @@ def get_values(dict: dict)->list:
 
 def main():
 
-    writer = GoogleWriter()
+    # writer = GoogleWriter()
     crm = AmoCrm()
+    writerV2 = GoogleWriterV2() # with dynamic cells
+    events = crm.filter_entity_type("company") # one of [lead, contact, company, customer, task]
     
-    # events = crm.filter_entity_type("company") # one of [lead, contact, company, customer, task]
-    
-    events = crm.filter_date() # last 12 hours, can change in amoCRM.py
+    # events = crm.filter_date() # last 12 hours, can change in amoCRM.py
 
     written_data = [[i.account_id, i.id, i.type, i.entity_id, 
                      i.entity_type, i.created_at.strftime("%H-%M-%S %B %d, %Y"), str(i.value_before), str(i.value_after)] for i in events]
-    writer.write(written_data)
+    writerV2.write(written_data)
 
 
 if __name__ == "__main__":
